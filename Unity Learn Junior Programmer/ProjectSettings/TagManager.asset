@@ -8,6 +8,10 @@ TagManager:
   - Inimigo
   - Chao
   - Powerup
+  - Sensor
+  - Bad
+  - Enemy
+  - PlayerGoal
   layers:
   - Default
   - TransparentFX
