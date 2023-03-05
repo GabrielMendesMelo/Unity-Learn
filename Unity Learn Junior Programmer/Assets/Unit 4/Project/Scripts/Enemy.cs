@@ -32,7 +32,11 @@ namespace Prototype4
             SpawnManager spawnManager = FindObjectOfType<SpawnManager>();
             if (FindObjectsOfType<Enemy>().Length <= 1)
             {
-                spawnManager.SpawnEnemyWave();
+                if (!spawnManager.SpawnouBoss)
+                {
+
+                    spawnManager.SpawnEnemyWave();
+                }
             }
             Destroy(gameObject);
         }

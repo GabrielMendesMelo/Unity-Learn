@@ -12,15 +12,18 @@ TagManager:
   - Bad
   - Enemy
   - PlayerGoal
+  - InimigoHarder
+  - RocketPowerup
+  - SmashPowerUp
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Jogador
   - Water
   - UI
-  - 
-  - 
+  - Projetil
+  - Checkpoint
   - 
   - 
   - 
@@ -48,4 +51,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 3900025769
     locked: 0

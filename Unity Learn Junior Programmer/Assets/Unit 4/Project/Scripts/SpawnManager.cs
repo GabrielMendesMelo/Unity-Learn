@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Prototype4
@@ -7,11 +8,16 @@ namespace Prototype4
         [SerializeField] private Vector3 spawnPosition;
 
         [SerializeField] private GameObject[] enemies;
-        [SerializeField] private int maxInimigos = 9;
+        [SerializeField] private int maxInimigos = 10;
 
         [SerializeField] private GameObject[] powerUps;
 
-        private int numInimigosParaSpawn = 1;
+        [SerializeField] private GameObject boss;
+        [SerializeField] private Vector3 bossPosicao;
+
+        private int numInimigosParaSpawn = 8;
+
+        public bool SpawnouBoss { get; private set; }
 
         void Start()
         {
@@ -20,15 +26,22 @@ namespace Prototype4
 
         public void SpawnEnemyWave()
         {
-            for (int i = 0; i < numInimigosParaSpawn; i++)
-            {
-                CriarInimigo();
-            }
-            CriarPowerUp();
-            if (numInimigosParaSpawn <= maxInimigos)
+            if (numInimigosParaSpawn < maxInimigos)
             {
                 numInimigosParaSpawn++;
+
+                for (int i = 0; i < numInimigosParaSpawn; i++)
+                {
+                    CriarInimigo();
+                }
+                CriarPowerUp();
             }
+            else
+            {
+                CriarBoss();
+            }
+
+
         }
 
         private void CriarInimigo()
@@ -38,11 +51,23 @@ namespace Prototype4
             Instantiate(enemy, pos, enemy.transform.rotation);
         }
 
+        private void CriarBoss()
+        {
+            Instantiate(boss, bossPosicao, boss.transform.rotation);
+            SpawnouBoss = true;
+            CriarPowerUpPorTempo();
+        }
+
         private void CriarPowerUp()
         {
             GameObject powerup = RandomArrayItem(powerUps);
             Vector3 pos = GenerateSpawnPosition();
             Instantiate(powerup, pos, powerup.transform.rotation);
+        }
+
+        private void CriarPowerUpPorTempo()
+        {
+            InvokeRepeating("CriarPowerUp", 10, 10);
         }
 
         private T RandomArrayItem<T>(T[] array)
